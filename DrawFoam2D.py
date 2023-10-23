@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plot
+
+L = 10
 file = r'C:\Repos\FoamGenerator\Examples\Foam2D_L10_l2.txt'
 x_start = []
 y_start = []
@@ -7,7 +9,7 @@ y_end = []
 p = 0
 for line in open(file):
     if (p == 0):
-        p=p+1
+        p = p+1
         continue
     line = line.split('\t')
     x_start.append(float(line[0]))
@@ -17,8 +19,8 @@ for line in open(file):
 
 p=0
 plot.figure(figsize=(4,4))
-plot.ylim(0, 10)
-plot.xlim(0, 10)
+plot.ylim(0, L)
+plot.xlim(0, L)
 plot.xlabel("L")
 for x in x_start:
     plot.plot([x_start[p], x_end[p]], [y_start[p], y_end[p]], color='c', alpha = 0.4)
