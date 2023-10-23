@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plot
-file = r'C:\Repos\FoamGenerator\2DFoam\Foam2D_L10_l1.txt'
+file = r'C:\Repos\FoamGenerator\Examples\Foam2D_L10_l2.txt'
 x_start = []
 y_start = []
 x_end = []

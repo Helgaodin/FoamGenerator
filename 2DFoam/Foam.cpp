@@ -14,7 +14,7 @@ using namespace std;
 
 void spill_needles(std::string address);
 bool isIntersect(Point res);
-std::vector<Cluster> GenerateSpecialClusters(std::vector<Needle>& Needles);
+std::vector<Cluster> GenerateSpecialClusters(std::vector<Needle> &Needles);
 std::vector<Needle> Washout(std::vector<Needle> Needles);
 mt19937_state state;
 ofstream ResultFile;
@@ -166,11 +166,11 @@ bool isIntersect(Point res)
 	{
 		return true;
 	}
-	
+
 	return false;
 }
 
-std::vector<Cluster> GenerateSpecialClusters(std::vector<Needle>& Needles)
+std::vector<Cluster> GenerateSpecialClusters(std::vector<Needle> &Needles)
 {
 	std::vector<Cluster> clusterNum;
 
@@ -234,7 +234,7 @@ std::vector<Needle> Washout(std::vector<Needle> Needles)
 	}
 
 	std::vector<Needle> SurvivedNeedles;
-	int j=0;
+	int j = 0;
 	for (int i = 0; i < Needles.size(); i++)
 	{
 		int index = NumbersToDelete[j];
