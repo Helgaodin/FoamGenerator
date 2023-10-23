@@ -15,6 +15,7 @@ using namespace std;
 void spill_needles(std::string address);
 bool isIntersect(Point res);
 std::vector<Cluster> GenerateSpecialClusters(std::vector<Needle>& Needles);
+std::vector<Needle> Washout(std::vector<Needle> Needles);
 mt19937_state state;
 ofstream ResultFile;
 
@@ -138,6 +139,14 @@ void spill_needles(std::string address)
 		SurvivedNeedles.push_back(Needles[needle]);
 	}
 
+	int previous = SurvivedNeedles.size();
+	SurvivedNeedles = Washout(SurvivedNeedles);
+	while (SurvivedNeedles.size() != previous)
+	{
+		previous = SurvivedNeedles.size();
+		SurvivedNeedles = Washout(SurvivedNeedles);
+	}
+
 	ResultFile.open(address, std::ios::app);
 	ResultFile << SurvivedNeedles.size() << "\n";
 	for (int i = 0; i < SurvivedNeedles.size(); i++)
@@ -198,4 +207,46 @@ std::vector<Cluster> GenerateSpecialClusters(std::vector<Needle>& Needles)
 	clusterNum.push_back(cluster);
 
 	return clusterNum;
+}
+
+std::vector<Needle> Washout(std::vector<Needle> Needles)
+{
+	std::vector<int> NumbersToDelete;
+	for (int i = 0; i < Needles.size(); i++)
+	{
+		int numberOfIntersect = 0;
+		for (int j = 0; j < Needles.size(); j++)
+		{
+			Point res = Needles[i].find_intersect(Needles[j]);
+			if (isIntersect(res))
+			{
+				numberOfIntersect++;
+			}
+		}
+		if ((numberOfIntersect == 1) && (Needles[i].lenInBox == Needles[i].length))
+		{
+			NumbersToDelete.push_back(i);
+		}
+	}
+	if (NumbersToDelete.size() == 0)
+	{
+		return Needles;
+	}
+
+	std::vector<Needle> SurvivedNeedles;
+	int j=0;
+	for (int i = 0; i < Needles.size(); i++)
+	{
+		int index = NumbersToDelete[j];
+		if (i != index)
+		{
+			SurvivedNeedles.push_back(Needles[i]);
+		}
+		else
+		{
+			j++;
+		}
+	}
+
+	return SurvivedNeedles;
 }
