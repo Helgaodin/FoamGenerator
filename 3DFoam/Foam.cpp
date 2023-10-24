@@ -24,10 +24,18 @@ PointAndCluster closiestIntersection(std::vector<PointAndCluster> PointsWhichSet
 mt19937_state state;
 ofstream ResultFile;
 
-int main()
+int main(int argc, char *argv[])
 {
+	std::string fileName;
+	if (argc != 2)
+	{
+		fileName = "Foam3D_L" + std::to_string(L) + "_l" + std::to_string(l) + ".txt";
+	}
+	else
+	{
+		fileName = argv[1];
+	}
 	mt19937_init_sequence_(&state, time(NULL));
-	string fileName = "Foam3D_L" + std::to_string(L) + "_l" + std::to_string(l) + ".txt";
 	foam_generation(fileName);
 	return 0;
 }
