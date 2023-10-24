@@ -2,6 +2,7 @@
 Foam generation for 2D and 3D.
 
 ###Usage
+
 In Foam.h you can set L - size of the box and l - size of the fiber.
 
 g++ Foam.cpp -o3 -o a.out
